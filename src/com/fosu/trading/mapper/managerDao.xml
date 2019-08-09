@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fosu.trading.dao.managerDao">
+	
+	<!-- 通过用户注册的手机号登录 -->
+	<select id="getUserByTel" parameterType="String" resultType="UserTb">
+		select USER_ID as userId,USER_NAME as userName,password,USER_TEL as userTel,USER_EMAIL as userEmail,sex,credit,REAL_NAME as realName,role,alipay,user_img as userImg 
+		from USER_TB where user_tel=#{userTel}
+	</select>
+	
+	  <!-- 通过用户注册的id获取用户信息 -->
+	<select id="getUserById" parameterType="String" resultType="UserTb">
+		select USER_ID as userId,USER_NAME as userName,password,USER_TEL as userTel,USER_EMAIL as userEmail,sex,credit,REAL_NAME as realName,role,alipay,user_img as userImg 
+		from user_tb where USER_ID=#{userId}
+	</select> 
+	
+	
+	<!-- 通过指定用户类型返回所有相应用户 -->
+	<select id="getAllUser" resultType="UserTb" parameterType="int">
+		select USER_ID as userId,USER_NAME as userName,password,USER_TEL as userTel,USER_EMAIL as userEmail,sex,credit,REAL_NAME as realName,role,alipay,user_img as userImg 
+		from user_tb where role=#{role} order by userid asc
+	</select>	
+	
+	
+	<!-- 通过指定查询列和查询列值返回所有相应用户 -->
+	<select id="getUserByAssign" resultType="UserTb" parameterType="String">
+		select USER_ID as userId,USER_NAME as userName,password,USER_TEL as userTel,USER_EMAIL as userEmail,sex,credit,REAL_NAME as realName,role,alipay,user_img as userImg 
+		from user_tb where  user_id=#{role}
+	</select>	
+	
+	
+	<!-- 更新用户信息 -->
+	<update id="updateUserInfo" parameterType="UserTb">
+		update user_tb
+		<set>
+			<if test="userName != null">USER_NAME=#{userName},</if>
+			<if test="password != null">password=#{password},</if>
+			<if test="userEmail != null">USER_EMAIL=#{userEmail},</if>
+			<if test="sex != null">sex=#{sex},</if>
+			<if test="credit != null">credit=#{credit},</if>
+			<if test="realName != null">REAL_NAME=#{realName},</if>
+			<if test="role != null">role=#{role},</if>
+			<if test="alipay != null">alipay=#{alipay}</if>
+		</set>
+		where user_id=#{userId}
+	</update>
+	
+	
+	<!-- 分页查询 -->
+	<select id="getUserByPage" resultType="UserTb" parameterType="Page">
+		select u.* from(
+			select rownum rn,USER_ID as userId,USER_NAME as userName,password,USER_TEL as userTel,USER_EMAIL as userEmail,sex,credit,REAL_NAME as realName,role,alipay
+		    from user_tb where role=#{role}
+		)u
+		where rn &lt; = #{currentPage}*#{pageSize} and rn &gt; (#{currentPage}-1)*#{pageSize}
+	</select>
+	
+	<!-- 查询表中所有行 -->
+	<select id="calculatecount" resultType="int" parameterType="Calculate">
+		select count(*) from ${tablename} where ${columnName}=#{role}
+	</select>	
+	
+	<select id="deleteUser" parameterType="String" >
+		delete from user_tb where user_tel=#{userTel}
+	</select>
+	
+	
+	<!-- 根据传进来的page来分页查询不同审核状态的商品 -->
+	<select id="getGoodsByPage" resultType="Goods" parameterType="Page">
+		select u.* from(
+		   select rownum rn,GOODS_ID as goodsId,TYPE_ID as typeId,GOODS_NAME as goodsName ,GOODS_DETAIL as goodsDetail,GOOD_PRICE as goodPrice,GOODS_LEFT as goodsLeft,GOODS_IMG as goodsImg,PUBLISH_UP as publishUp,PUBLISH_DOWN as publishDown,SELLER_ID as sellerId,GOODS_STATUS as goodsStatus,DOWN_REASON as downReason,AUDIT_RESULT as auditResult 
+		   from goods where AUDIT_RESULT=#{role}
+		)u
+		where rn &lt;=#{currentPage}*#{pageSize} and rn &gt;(#{currentPage}-1)*#{pageSize}
+	</select>
+	
+	<!-- 根据传进来的goodsid更改指定商品信息 -->
+	<update id="updateGoodsStatus" parameterType="Goods">
+		update goods
+			<set>
+				<if test="typeId != null">TYPE_ID=#{typeId},</if>
+				<if test="goodsName != null">GOODS_NAME=#{goodsName},</if>
+				<if test="goodsDetail != null">GOODS_DETAIL=#{goodsDetail},</if>
+				<if test="goodPrice != null">GOOD_PRICE=#{goodPrice},</if>
+				<if test="goodsLeft != null">GOODS_LEFT=#{goodsLeft},</if>
+				<if test="goodsImg != null">GOODS_IMG =#{goodsImg},</if>
+				<if test="publishUp != null">PUBLISH_UP =#{publishUp},</if>
+				<if test="publishDown != null">PUBLISH_DOWN =#{publishDown},</if>
+				<if test="sellerId != null">SELLER_ID =#{sellerId},</if>
+				<if test="goodsStatus != null">GOODS_STATUS =#{goodsStatus},</if>
+				<if test="downReason != null">DOWN_REASON =#{downReason},</if>
+				<if test="auditResult != null">AUDIT_RESULT =#{auditResult}</if>
+			</set>
+		where GOODS_ID=#{goodsId}
+	</update>
+	
+	<!-- 查询商品指定列的指定类型 -->
+	<select id="getGoodsByAssign" resultType="Goods" parameterType="int">
+		   select GOODS_ID as goodsId,TYPE_ID as typeId,GOODS_NAME as goodsName ,GOODS_DETAIL as goodsDetail,GOOD_PRICE as goodPrice,GOODS_LEFT as goodsLeft,GOODS_IMG as goodsImg,PUBLISH_UP as publishUp,PUBLISH_DOWN as publishDown,SELLER_ID as sellerId,GOODS_STATUS as goodsStatus,DOWN_REASON as downReason,AUDIT_RESULT as auditResult 
+		   from goods where GOODS_ID=#{role}
+	</select>
+	
+	
+	<select id="getAppealByPage" parameterType="Page" resultType="Appeal">
+		select a.* from(
+		   select rownum rn,APPEAL_ID as appealId,APPEAL_TIME as appealTime,ORDER_ID as orderId,APPEAL_STATUS as appealStatus,APPEAL_RESULT as appealResult,APPEAL_REASON as appealReason,APPEAL_IMG as appealImg
+		   from APPEAL where APPEAL_STATUS=${role}
+		)a
+		where rn &lt;=#{currentPage}*#{pageSize} and rn &gt;(#{currentPage}-1)*#{pageSize}
+	</select>
+	
+	
+	<select id="getOrderAppeal" parameterType="int" resultType="orderAppeal">
+		select APPEAL_ID as appealId,ORDER_ID as orderId,BUYER_ID as buyerId,SELLER_ID as sellerId,credit,GOODS_ID as goodsId from appeal_order where APPEAL_ID=#{id}
+	</select>
+	
+	<!-- 更新申诉表的信息 -->
+	<update id="updateAppeal" parameterType="orderAppeal">
+		begin
+		<if test="credit != null">
+			update user_tb 
+			<set>
+				credit=#{credit} 
+			</set>
+			where user_id=#{sellerId};
+		</if>
+		<if test="appealReason != null">
+			update appeal 
+			<set>
+				<if test="appealReason != null">APPEAL_REASON=#{appealReason},</if>
+				<if test="role != null">APPEAL_STATUS=#{role}</if>
+			</set>
+			where APPEAL_ID=#{appealId}
+		</if>
+		;end;
+	</update>
+	
+	<select id="getAAppeal" parameterType="int" resultType="Appeal">
+		 select APPEAL_ID as appealId,APPEAL_TIME as appealTime,ORDER_ID as orderId,APPEAL_STATUS as appealStatus,APPEAL_RESULT as appealResult,APPEAL_REASON as appealReason,APPEAL_IMG as appealImg
+		   from  APPEAL where APPEAL_ID=#{id}
+	</select>
+</mapper>

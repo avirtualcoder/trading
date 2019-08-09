@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fosu.trading.dao.SellOrderMapper">
+<select id="findSellerOrderList" parameterType="String" resultType="SellerOrder">
+select PAYPRICE as payPrice,GOODSCOUNT as goodsCount,STAR,itemid as itemId, 
+GOODSNAME as goodsName,GOODSADRESS as goodsAdress,GOODSIMG as goodsImg,
+BUYER as buyer,RECEIPTNAME as receiptName,RECEIPTADDRESS as receiptAddress,
+RECEIPTTEL as receiptTel,ORDER_STATUS as orderStatus,PAYMENT as payMent
+from sellerOrder where sellerid=#{sellerId}
+</select>
+</mapper>

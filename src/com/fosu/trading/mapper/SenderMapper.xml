@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fosu.trading.dao.SenderMapper">
+
+<select id="findSenderByUserId" parameterType="String" resultType="Sender">
+select sender_id as senderId,sender_name as senderId,sender_identity as senderIdentity, user_id as userId,sender_tel as senderTel from sender where user_id=#{userId}
+</select>
+
+<insert id="insertSender" parameterType="Sender">
+insert into sender (SENDER_NAME,SENDER_IDENTITY,USER_ID,SENDER_TEL)values(#{senderName},#{senderIdentity},#{userId},#{senderTel})
+</insert>
+
+
+
+<select id="findTaskList" parameterType="String" resultType="Task">
+select g.goods_name as goodsName,g.goods_adress as goodsAdress,g.goods_img as goodsImg,u1.user_name as sellerName,u1.user_tel as sellerTel,u2.user_name as buyer,
+r.RECEIPT_PERSON as buyerName,r.receipt_tel as buyerTel,r.address as buyerAddress,o.order_status as orderStatus,o.order_time as orderTime,o.pick_task as pickTask 
+from goods g,user_tb u1,user_tb u2,order_item i,order_tb o,receipt r
+where i.order_id=o.order_id and o.receipt_id=r.receipt_id and g.seller_id=u1.user_id and o.buyer_id=u2.user_id and o.order_status=2 and o.pick_Task=2
+</select>
+
+<select id="findMyTask" parameterType="String" resultType="MyTask">
+select s.user_id as u2sId,s.sender_id as senderId,s.sender_Name as senderName,s.sender_Tel as senderTel,g.goods_name as goodsName,
+g.goods_adress as goodsAdress,g.goods_img as goodsImg,u1.user_name as sellerName,u1.user_tel as sellerTel,r.receipt_person as receiptPerson,r.address as receiptAddress,
+r.receipt_tel as receiptTel,r.receipt_time as receiptTime,o.order_status as orderStatus,d.DELIVERY_PLACE as deliveryPlace
+from sender s,user_tb u,user_tb u1,delivery d,order_tb o,goods g,order_item i,receipt r 
+where s.user_id=1 and u.user_id=s.user_id and d.sender_id=s.sender_id and d.order_id=o.order_id and o.order_id=i.order_id and
+i.goods_id=g.goods_id and o.receipt_id=r.receipt_id and g.seller_id=u1.user_id and s.sender_Id=#{senderId}
+</select>
+
+<insert id="addDelivery" parameterType="String">
+insert into Delivery (ORDER_ID，SENDER_ID，DELIVERY_PLACE)values(#{0},#{1},'配送中');
+update order_tb set PICK_TASK=1 where order_id=#{1}
+</insert>
+
+</mapper>

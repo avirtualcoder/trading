@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- namespace必须是对应接口的地址 -->
+<mapper namespace="com.fosu.trading.dao.GoodMapper">
+
+	<select id="selectGoodmessage" parameterType="String" resultType="Good">
+	select GOODS_NAME as goodsName,GOODS_DETAIL as goodsDetail,GOODS_ID as goodsId,GOODS_IMG  as goodsImg,
+	GOOD_PRICE as goodPrice,TYPE_ID as typeId,SELLER_ID as sellerId,USER_NAME,CREDIT,USER_ID
+	from GOODS,USER_TB
+	where SELLER_ID=USER_ID and type_Id=#{type_Id}
+	</select>
+	
+<!-- 	<select id="selectGoodmessage" parameterType="Page" resultType="Good"> -->
+<!-- 	select GOODS_NAME as goodsName,GOODS_DETAIL as goodsDetail,GOODS_ID as goodsId,GOODS_IMG  as goodsImg, -->
+<!-- 	GOOD_PRICE as goodPrice,TYPE_ID as typeId,SELLER_ID as sellerId,USER_NAME,CREDIT,USER_ID -->
+<!-- 	from GOODS,USER_TB -->
+<!-- 	where type_Id=#{type_Id}  -->
+<!-- 	</select> -->
+	
+	
+<!-- 	<select id="selectUserMessage" parameterType="String" resultType="User"> -->
+<!-- 	select USER_ID,USER_NAME,CREDIT,SELLER_ID as sellerId.GOODS_NAME as goodsName -->
+<!-- 	from GOODS,USER_TB -->
+<!-- 	where SELLER_ID=USER_ID and SELLER_ID=#{sellerId} -->
+<!-- 	</select> -->
+	
+	<select id="selectGoodbyid" parameterType="String" resultType="Good">
+	
+	select GOODS_IMG as goodsImg,GOODS_NAME as goodsName,GOOD_PRICE as goodPrice,GOODS_ID as goodsId,
+	GOODS_LEFT as goodsLeft,GOODS_DETAIL as goodsDetail,GOODS_ADRESS as goodsAdress
+	from GOODS 
+	where GOODS_ID=#{goodsId}
+	
+	</select>
+	
+</mapper>

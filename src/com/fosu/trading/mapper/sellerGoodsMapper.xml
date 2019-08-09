@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fosu.trading.dao.SellerGoodsMapper">
+
+	<select id="findGoodsList" parameterType="String"
+		resultType="Goods">
+		select GOODS_ID as goodsId,TYPE_ID as typeId,GOODS_NAME as goodsName ,GOODS_DETAIL as goodsDetail,GOOD_PRICE as goodPrice,GOODS_LEFT as goodsLeft,GOODS_IMG as goodsImg,GOODS_STATUS as goodsStatus from GOODS where SELLER_ID=#{sellerId}
+	</select>
+	
+	<select id="findGoodsById" parameterType="String" resultType="Goods">
+		select GOODS_ID as goodsId,TYPE_ID as typeId,GOODS_NAME as goodsName ,GOODS_DETAIL as goodsDetail,GOOD_PRICE as goodPrice,GOODS_LEFT as goodsLeft,GOODS_IMG as goodsImg,PUBLISH_UP as publishUp,PUBLISH_DOWN as publishDown,SELLER_ID as sellerId,GOODS_STATUS as goodsStatus,DOWN_REASON as downReason,AUDIT_RESULT as auditResult,GOODS_ADRESS as goodsAdress from GOODS where goods_ID=#{goodsId}
+	</select>
+	
+	<insert id="insertGoods" parameterType="Goods">
+	insert into GOODS (TYPE_ID,GOODS_NAME,GOODS_DETAIL,GOOD_PRICE,GOODS_LEFT,GOODS_ADRESS,GOODS_IMG,seller_id)values(#{typeId},#{goodsName},#{goodsDetail},#{goodPrice},#{goodsLeft},#{goodsAdress},#{goodsImg},#{sellerId})
+	</insert>
+	
+	<delete id="deleteGoods">
+	delete from goods where goods_id=#{goodsId}
+	</delete>
+	
+	<update id="updateGoodsStatus" parameterType="String" >
+	update goods set GOODS_STATUS=#{1} where goods_id=#{0}
+	</update> 
+	
+	<update id="updateGoods" parameterType="Goods">
+	update goods set TYPE_ID=#{typeId},GOODS_NAME=#{goodsName},GOODS_DETAIL=#{goodsDetail},GOOD_PRICE=#{goodPrice},GOODS_LEFT=#{goodsLeft},GOODS_ADRESS=#{goodsAdress},GOODS_IMG=#{goodsImg} where goods_Id=#{goodsId}
+	</update>
+</mapper>

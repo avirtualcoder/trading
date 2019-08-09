@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fosu.trading.dao.UserMapper">
+		
+		<select id="findByUsername" parameterType="String" resultType="com.fosu.trading.po.UserTb">
+			select * from USER_TB where USER_TEL=#{userTel}
+		</select>
+		
+		<insert id="registerByUsernameAndPassword" >
+
+			insert into USER_TB(User_ID,USER_TEL,PASSWORD,USER_NAME,SEX,USER_EMAIL,REAL_NAME,ADDRESS) 
+			values(#{userTel},#{userTel},#{password},#{userName},#{sex},#{userEmail},#{userName},#{address})
+		
+		</insert>
+		
+<!-- 		<select id="checkuser" parameterType="String" resultType="User"> -->
+<!-- 			select USER_TEL from USER_TB where USER_TEL=#{userTel} -->
+<!-- 		</select> -->
+
+</mapper>

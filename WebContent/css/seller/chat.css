@@ -1,0 +1,126 @@
+@CHARSET "UTF-8";
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    background-image: url(../img/11.png);
+    background-size:cover;
+}
+
+
+
+#head{
+    margin-top: 5%;
+    font-size: 50px;
+    text-align: center;
+    color:black;
+    font-family: 宋体;
+    background-color: #fadf81;
+    background-size: 100% 100%;
+}
+
+
+#control {
+    width: 50%;
+    height: 55px;
+    line-height: 55px;
+    margin: 15px 0px 20px 460px;
+    padding: 0;
+    text-align: center;
+}
+
+#control a {
+    width: 200px;
+    display: block;
+    font-size: 25px;
+    color: black;
+    margin-left: 20%;
+    border-radius: 6%;
+    background-color: #FFCC33;
+    text-decoration: none;
+    float: left;
+}
+
+#control a:hover {
+    font-size: 26px;
+    color: white;
+    background-color: #FF9900;
+    transition: 0.3s;
+}
+
+#chat_list{
+    margin:20px 0px 0px 100px;
+    width: 220px;
+    height: auto;
+}
+
+#chat_list ul{
+    list-style-type: none;
+}
+
+#chat_list li{
+    height: 25px;
+    font-size: 20px;
+    float: left;
+}
+
+
+
+/*主体*/
+.main{
+    position: relative;
+    margin: 20px auto;
+    border: 1px solid steelblue;
+    width: 430px;
+    height: 400px;
+}
+
+/*输入框*/
+.msgInput{
+    display: block;
+    width: 406px;
+    height: 60px;
+    margin: 10px auto;
+
+}
+
+/*按钮*/
+.sendbtn{
+    position: absolute;
+    width: 100px;
+    height: 29px;
+    bottom: 5px;
+    right: 10px;
+}
+
+/*内容*/
+.content{
+    list-style: none;
+    width: 410px;
+    height: 280px;
+    margin: 5px auto;
+    border: 1px dotted #D1D3D6;
+    overflow-y: scroll;
+}
+.msgContent{
+    width:auto;
+    max-width: 250px;
+    height: auto;
+    word-break: break-all;
+    margin: 5px;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.content .left{
+    float: left;
+    text-align: left;
+    background-color: lightgrey;
+}
+.content .right{
+    float: right;
+    text-align: right;
+    background-color: yellowgreen;
+}

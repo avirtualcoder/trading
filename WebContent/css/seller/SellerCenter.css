@@ -1,0 +1,149 @@
+@CHARSET "UTF-8";
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    background-image: url(../img/11.png);
+    background-size:cover;
+}
+
+
+
+#head{
+    margin-top: 5%;
+    font-size: 50px;
+    text-align: center;
+    color:black;
+    font-family: 宋体;
+    background-color: #fadf81;
+    background-size: 100% 100%;
+}
+
+
+
+
+#right_nav{
+    margin-left:23%;
+    margin-top: 5%;
+    float: left;
+}
+
+#right_nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#right_nav img{
+    width: 50px;
+    height: 45px;
+    border-radius: 100%;
+}
+
+#right_nav li{
+    margin-top: 15px;
+    padding-top:30px;
+    border-radius: 8%;
+    
+}
+
+#right_nav li a {
+    width:90px;
+    display: block;
+    color: #000;
+    padding: 20px 18px;
+    font-size: 20px;
+    background-color: #FFCC33;
+    border-radius: 8%;
+    float: right;
+    text-decoration: none;
+}
+
+/* 鼠标移动到选项上修改背景颜色 */
+#right_nav li a:hover {
+    background-color:#FF9900;
+    color: white;
+    transition: 0.4s;
+}
+
+
+#seller_info{
+    float: right;
+    width: 40%;
+    height: 300px;
+    margin:80px 180px 0px 0px;
+    background-color:#CC9933;
+    text-align: center;
+    opacity: 0.9;
+    border-radius: 10%;
+}
+
+#seller_info table{
+    margin:35px 0px 0px 115px;
+    font-size: 20px
+}
+
+#seller_info img{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+}
+
+#seller_info ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#seller_info li{
+    margin-left: 75px;
+    margin-top: 30px;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+    float: left;    
+}
+
+#seller_info a{
+    text-decoration: none;
+    font-size: 20px;
+    background-color: white;
+    border-radius: 10%;
+    color: black;
+    display: block;
+    
+}
+
+#seller_info a:hover{
+    color: white;
+    background-color: #FFCC33;
+    font-size: 21px;
+    transition: 0.5s;
+}
+
+/*#goods_manage{
+    width: 140px;
+    height: 55px;
+    line-height: 55px;
+    margin:330px 100px 20px 550px;
+    padding: 0;
+    text-align: center;
+}
+
+#goods_manage a{
+    display: block;
+    font-size: 25px;
+    color: black;
+    border-radius: 6%;
+    background-color: #FFCC33;
+    text-decoration: none;
+}
+
+#goods_manage a:hover{
+    font-size: 26px;
+    color: white;
+    background-color:#FF9900;
+    transition: 0.3s;
+}*/

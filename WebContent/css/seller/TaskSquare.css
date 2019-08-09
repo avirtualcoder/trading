@@ -1,0 +1,87 @@
+@CHARSET "UTF-8";
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    background-image: url(../img/11.png);
+    background-size:cover;
+}
+
+#head {
+    margin-top: 3%;
+    font-size: 50px;
+    text-align: center;
+    color: black;
+    font-family: 宋体;
+    background-color: #fadf81;
+    background-size: 100% 100%;
+}
+
+#head_nav{
+    width: 800px;
+    height: 60px;
+    margin-left:22%;
+    margin-top:2%;
+}
+
+#head_nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#head_nav img{
+    width: 50px;
+    height: 45px;
+    border-radius: 100%;
+}
+
+#head_nav li{
+    border-radius: 8%;
+    margin-left: 120px;
+    float: left;
+}
+
+#head_nav li a {
+    width:90px;
+    display: block;
+    color: #000;
+    padding:10px 18px;
+    font-size: 20px;
+    background-color: #FFCC33;
+    border-radius: 8%;
+    float: right;
+    text-decoration: none;
+}
+
+/* 鼠标移动到选项上修改背景颜色 */
+#head_nav li a:hover {
+    background-color:#FF9900;
+    color: white;
+    transition: 0.4s;
+}
+
+
+#table{
+    font-size:20px;
+    margin: 50px 15px 0px 16px;
+}
+
+#table th{
+    width:auto;
+    height: 40px;
+}
+
+#table button{
+    width: 70px;
+    margin: 5px 10px;
+}
+
+#search_by_area{
+    font-size: 25px;
+    margin:30px 0px 0px 470px;
+}
+
+
